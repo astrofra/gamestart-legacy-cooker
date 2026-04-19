@@ -8,13 +8,16 @@ The relevant source files in the old tree are:
 - `source/editor/publisher/editor_publisher.cpp`: editor publishing flow.
 - `source/cooker/*.cpp`: optional asset conversion before packaging.
 
-The important split is that `source/cooker` does not define the `.nac` file
+The important split is that `source/cooker` does not define the package file
 format. It converts individual resources, mostly textures, then the editor
 publisher stores the resulting files in an `nArchive`.
 
+The original GameStart cooker/archive code was authored by Emmanuel Julien:
+https://github.com/ejulien/
+
 ## Header
 
-All integer fields observed in the Windows archives are little-endian 32-bit
+All integer fields observed in Windows-built archives are little-endian 32-bit
 values.
 
 - Enhanced archives write the integer `0x4E415244`. On disk this appears as
@@ -24,9 +27,6 @@ values.
   names it `NARC`.
 - Enhanced archives then store `offset_padding` and `size_padding` as 32-bit
   unsigned integers.
-
-The Magnetis archive tested here uses the enhanced header with
-`offset_padding = 4` and `size_padding = 0`.
 
 ## Entries
 
@@ -46,8 +46,8 @@ Methods:
 - `1`: zlib payload created with `compress2`.
 
 The writer appends `0xffffffff` as an end marker, but the old `Close()` code
-does not align before writing it. The parser in this project checks for that
-unaligned marker before applying normal entry alignment.
+does not align before writing it. The parser checks for that unaligned marker
+before applying normal entry alignment.
 
 ## Packing Policy
 
@@ -65,12 +65,11 @@ The archive supports per-entry methods. Use repeated `--raw` globs when only
 some files should stay uncompressed, for example audio streams:
 
 ```powershell
-python -m gamestart_legacy_cooker pack unpacked game.nac --raw "data/sfx/*" --raw "data/music/*"
+bin\gamestart-cooker.exe pack unpacked game.nac --raw "data/sfx/*" --raw "data/music/*"
 ```
 
 ## Format Limits
 
 - Alias length is limited to 511 bytes by the original reader.
-- The validated enhanced header layout is the one used by Magnetis:
-  header fields at offsets 0, 4, and 8 with 4-byte entry alignment.
 - No timestamps, file permissions, or directory entries are stored.
+- Path aliases are stored as archive-local forward-slash paths.

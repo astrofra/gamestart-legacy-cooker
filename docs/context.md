@@ -1,21 +1,16 @@
 # Context
 
-GameStart was a 2D and 3D game engine/editor. The public website is still
-available at https://coaching-games.net/.
+GameStart was a 2D and 3D game engine/editor with runtime resource packaging.
+The public website is available at https://coaching-games.net/.
 
-Useful public context from that site:
+The old source tree separates the workflow into two parts:
 
-- The documentation page describes GameStart documentation as split between
-  the editor, the framework, and application scripting:
-  https://coaching-games.net/content/documentation.html
-- The download page describes the old Windows editor beta and sample package:
-  https://coaching-games.net/content/download.html
-- The FAQ describes GameStart as covering 3D, 2D, audio, physics, resource
-  management, and scripting, and lists Magnetis among shipped projects:
-  https://coaching-games.net/content/faq.html
+- `source/cooker`: platform-specific resource conversion before packaging.
+- `source/framework/archive`: the `nArchive` package container consumed by the runtime.
 
-The local source tree matches that split. The publisher gathers runtime and
-project files, optionally runs a platform cooker on each resource, then writes
-the final package with `nArchive`. Magnetis ships a `magnetis.nac` package
-using this archive format.
+The tool in this repository implements the package container as a standalone
+command-line program. It does not attempt to reproduce texture conversion or
+platform publishing steps.
 
+The original GameStart cooker/archive code was authored by Emmanuel Julien:
+https://github.com/ejulien/
