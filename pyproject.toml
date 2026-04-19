@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gamestart-legacy-cooker"
+version = "0.1.0"
+description = "Command-line packer and unpacker for legacy GameStart nArchive files."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "GPL-3.0-only" }
+authors = [
+  { name = "Legacy preservation tooling" }
+]
+dependencies = []
+
+[project.scripts]
+gamestart-cooker = "gamestart_legacy_cooker.cli:main"
+nac-cooker = "gamestart_legacy_cooker.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

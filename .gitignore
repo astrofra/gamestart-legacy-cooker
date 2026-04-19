@@ -2,7 +2,11 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
+*.exe
+*.obj
+*.o
 build/
 dist/
+CMakeFiles/
+CMakeCache.txt
 .pytest_cache/
-
