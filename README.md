@@ -1,4 +1,4 @@
-# GameStart Legacy Cooker
+# GameStart3D Legacy Cooker
 
 Standalone command-line tool for legacy GameStart `nArchive` packages
 (`.nac` and `.gsa`).
