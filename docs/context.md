@@ -1,7 +1,9 @@
 # Context
 
 GameStart was a 2D and 3D game engine/editor with runtime resource packaging.
-The public website is available at https://coaching-games.net/.
+Archives of the original public website are (partially) available at:
+- https://coaching-games.net/
+- https://web.archive.org/web/20130528221944/http://www.gamestart3d.com/home
 
 The old source tree separates the workflow into two parts:
 
